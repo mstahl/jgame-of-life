@@ -35,34 +35,41 @@ $(function () {
     $(this).toggleClass("active");
   });
   var step_one_generation = function () {
-    changed = false;
+    activate = [];
+    deactivate = [];
     for(var row = 0; row < rows; ++row) {
       for(var col = 0; col < cols; ++col) {
         neighbours = num_neighbours(row, col);
         if (cell(row,col).hasClass('active')) {
           if (neighbours != 2 && neighbours != 3) {
-            cell(row, col).removeClass('active');
-            changed = true;
+            deactivate = deactivate.concat([cell(row, col)]);
           }
         }
         else {
           if (neighbours == 3) {
-            cell(row, col).addClass('active');
-            changed = true;
+            activate = activate.concat([cell(row, col)]);
           }
         }
       }
     }
-    if (changed == false && timer != null) {
+    if (deactivate.length + activate.length == 0 && timer != null) {
       window.clearInterval(timer);
       timer = null;
       alert("Simulation ended");
+    }
+    else {
+      for(var i = 0; i < activate.length; ++i) {
+        activate[i].addClass('active');
+      }
+      for(var j = 0; j < deactivate.length; ++j) {
+        deactivate[j].removeClass('active');
+      }
     }
   };
   
   $("#start-simulation").click(function () {
     if(timer == null) {
-      timer = window.setInterval(step_one_generation, 500);
+      timer = window.setInterval(step_one_generation, 10);
     }
   });
   $("#step-one-generation").click(step_one_generation);
