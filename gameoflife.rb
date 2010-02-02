@@ -9,5 +9,5 @@ end
 get '/stylesheets/:name.css' do
   content_type 'text/css', :charset => 'utf-8'
 
-  sass(:"/public/stylesheets/#{params[:name]}")
+  sass(:"/stylesheets/#{params[:name]}")
 end
