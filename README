@@ -1,0 +1,9 @@
+                    _                
+ _ __ ___  __ _  __| |_ __ ___   ___ 
+| '__/ _ \/ _` |/ _` | '_ ` _ \ / _ \
+| | |  __/ (_| | (_| | | | | | |  __/
+|_|  \___|\__,_|\__,_|_| |_| |_|\___|
+
+Super-simple Conway's game of life sim that runs in a browser. That's it.
+
+Uses Haml, Sass, and Sinatra to do its thing.
