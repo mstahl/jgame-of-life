@@ -93,9 +93,14 @@ $(function () {
     else {
       for(i = 0; i < activate.length; ++i) {
         field[activate[i].row][activate[i].col] = true;
+        // Also draw a fresh rectangle there
+        // context.fillStyle = "rgb(0, 255, 0)";
+        // context.fillRect(activate[i].col * 10, activate[i].row * 10, 10, 10);
       }
       for(j = 0; j < deactivate.length; ++j) {
         field[deactivate[j].row][deactivate[j].col] = false;
+        // Also clear that rectangle
+        // context.clearRect(deactivate[i].col * 10, deactivate[i].row * 10, 10, 10);
       }
       
       redraw();
@@ -113,6 +118,7 @@ $(function () {
       }
     }
     context.strokeStyle = "rgb(200,200,255)";
+    context.beginPath();
     for(i = 0; i < rows; ++i) {
       context.moveTo(0, i * 10);
       context.lineTo(cols * 10, i * 10);
@@ -129,7 +135,7 @@ $(function () {
       timer = window.setInterval(function () {
         step_one_generation();
         frame_count++;
-      }, 1000 / 12);
+      }, 1000 / 36);
     }
   });
   $("#step-one-generation").click(step_one_generation);
