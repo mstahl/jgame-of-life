@@ -93,14 +93,9 @@ $(function () {
     else {
       for(i = 0; i < activate.length; ++i) {
         field[activate[i].row][activate[i].col] = true;
-        // Also draw a fresh rectangle there
-        // context.fillStyle = "rgb(0, 255, 0)";
-        // context.fillRect(activate[i].col * 10, activate[i].row * 10, 10, 10);
       }
       for(j = 0; j < deactivate.length; ++j) {
         field[deactivate[j].row][deactivate[j].col] = false;
-        // Also clear that rectangle
-        // context.clearRect(deactivate[i].col * 10, deactivate[i].row * 10, 10, 10);
       }
       
       redraw();
@@ -135,10 +130,25 @@ $(function () {
       timer = window.setInterval(function () {
         step_one_generation();
         frame_count++;
-      }, 1000 / 36);
+      }, 1);
     }
   });
   $("#step-one-generation").click(step_one_generation);
+  $("#stop-simulation").click(function () {
+    window.clearInterval(timer);
+    timer = null;
+  });
+  $("#clear").click(function () {
+    field = {};
+    for(i = 0; i < rows; ++i) {
+      field[i] = {};
+      for(j = 0; j < cols; ++j) {
+        field[i][j] = false;
+      }
+    }
+    
+    redraw();
+  });
   
   redraw();
 });
