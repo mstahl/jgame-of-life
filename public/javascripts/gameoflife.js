@@ -57,13 +57,15 @@ $(function () {
   };
   
   // Set onclick to toggle active state of cells
-  $("#game-of-life").click(function (e) {
+  var handle_mouse = function (e) {
     var row = Math.floor((e.layerY - $("#game-of-life").offset().top) / 10);
     var col = Math.floor((e.layerX - $("#game-of-life").offset().left) / 10);
     
     field[row][col] = !field[row][col];
     redraw();
-  });
+  };
+  $("#game-of-life").click(handle_mouse);
+  
   
   var step_one_generation = function () {
     activate = [];
@@ -100,8 +102,8 @@ $(function () {
     }
   };
   
-  redraw = function () {
-    context.clearRect(0, 0, $("#game-of-life").width(), $("#game-of-life").height());
+  var redraw = function () {
+    context.clearRect(0, 0, cols * 10, rows * 10);
     context.fillStyle = "rgb(0,255,0)";
     for(i = 0; i < rows; ++i) {
       for(j = 0; j < cols; ++j) {
@@ -113,11 +115,11 @@ $(function () {
     context.strokeStyle = "rgb(200,200,255)";
     for(i = 0; i < rows; ++i) {
       context.moveTo(0, i * 10);
-      context.lineTo($("#game-of-life").width(), i * 10);
+      context.lineTo(cols * 10, i * 10);
     }
     for(j = 0; j < cols; ++j) {
       context.moveTo(j * 10, 0);
-      context.lineTo(10 * j, $("#game-of-life").width());
+      context.lineTo(10 * j, rows * 10);
     }
     context.stroke();
   };

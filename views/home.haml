@@ -10,11 +10,6 @@
     %script{ :src => "/javascripts/gameoflife.js" }
   %body
     %div#content
-      - # %table#game-of-life{:cellspacing => '0', :cellpadding => '0'}
-      - #   - (0..29).each do |row|
-      - #     %tr
-      - #       - (0..59).each do |col|
-      - #         %td.cell{ :id => "cell-#{row}-#{col}" } &nbsp;
       %canvas#game-of-life{:width => @width * 10, :height => @height * 10}
         Your browser doesn't support canvases. You should get a new one.
       %h1 game of life
